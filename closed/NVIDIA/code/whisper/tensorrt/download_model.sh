@@ -17,7 +17,7 @@ source code/common/file_downloads.sh
 
 
 # Make sure the script is executed inside the container
-if [ -e /work/code/whisper/tensorrt/download_models.sh ]
+if [ -e /work/code/whisper/tensorrt/download_model.sh ]
 then
     echo "Inside container, start downloading..."
 else
