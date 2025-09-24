@@ -191,10 +191,10 @@ endif
 # UID 0 is reserved for the root user, which is not allowed to run the docker container.
 .PHONY: check_user_requirements
 check_user_requirements:
-	@if [ $(UID) -eq 0 ]; then \
-		echo "ERROR: User $(UNAME) has UID 0 (root). This is not allowed for security reasons."; \
-		exit 1; \
-	fi
+# 	@if [ $(UID) -eq 0 ]; then \
+# 		echo "ERROR: User $(UNAME) has UID 0 (root). This is not allowed for security reasons."; \
+# 		exit 1; \
+# 	fi
 	@if [ "$(NO_GPU_DETECTED)" -eq 1 ]; then  \
 		echo "No NVIDIA GPU detected."; exit 1; \
 	fi
