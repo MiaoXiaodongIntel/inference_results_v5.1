@@ -1,2 +1,0 @@
-#!/bin/bash
-docker build --platform linux/amd64 --tag mlperf_rocm_sdxl:micro_shortfin_nogil_v0 --file SDXL_inference/sdxl_harness_rocm_shortfin_no_gil.dockerfile .

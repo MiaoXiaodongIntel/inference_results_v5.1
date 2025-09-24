@@ -1,1 +1,0 @@
-accuracy=76.523%, good=1545, total=2019

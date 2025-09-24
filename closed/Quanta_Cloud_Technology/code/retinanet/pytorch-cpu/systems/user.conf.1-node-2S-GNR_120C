@@ -1,2 +1,0 @@
-*.Offline.target_qps = 700
-*.Server.target_qps = 540
