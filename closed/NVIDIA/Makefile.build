@@ -285,6 +285,9 @@ build_trt_llm:
 	cd $(TRTLLM_DIR) && CCACHE_NODISABLE=true /work/.llm_$(ARCH)/bin/python scripts/build_wheel.py --use_ccache --benchmarks -a="$(TRTLLM_BUILD_ARCH)" --no-venv --clean
 	/work/.llm_$(ARCH)/bin/pip install $(TRTLLM_BUILD_DIR)/tensorrt*.whl
 	/work/.llm_$(ARCH)/bin/pip install -r docker/common/requirements/requirements.llm.txt
+# Only install required tensorrt package in main python env
+	@pip install -r docker/common/requirements/requirements.llm.txt
+	@pip install --extra-index-url https://pypi.nvidia.com/simple --no-cache-dir tensorrt==10.11.0.33 tensorrt-cu12-bindings==10.11.0.33 tensorrt_cu12_libs==10.11.0.33 tensorrt-llm==0.21.0
 # Mainly to add the huggingface token required by /work/build/TRTLLM/docs/source/quick-start-guide.md
 	@pip install huggingface_hub && huggingface-cli login --token $(HUGGINGFACE_HUB_TOKEN)
 
