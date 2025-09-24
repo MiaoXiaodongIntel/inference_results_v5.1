@@ -285,7 +285,8 @@ build_trt_llm:
 	cd $(TRTLLM_DIR) && CCACHE_NODISABLE=true /work/.llm_$(ARCH)/bin/python scripts/build_wheel.py --use_ccache --benchmarks -a="$(TRTLLM_BUILD_ARCH)" --no-venv --clean
 	/work/.llm_$(ARCH)/bin/pip install $(TRTLLM_BUILD_DIR)/tensorrt*.whl
 	/work/.llm_$(ARCH)/bin/pip install -r docker/common/requirements/requirements.llm.txt
-
+# Mainly to add the huggingface token required by /work/build/TRTLLM/docs/source/quick-start-guide.md
+	@pip install huggingface_hub && huggingface-cli login --token $(HUGGINGFACE_HUB_TOKEN)
 
 # Build TensorRT plugins.
 .PHONY: build_plugins
