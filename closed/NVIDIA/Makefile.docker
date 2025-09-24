@@ -101,6 +101,7 @@ ifndef HUGGINGFACE_HUB_TOKEN
     $(error not pass env HUGGINGFACE_HUB_TOKEN!)
 endif
 DOCKER_ENV_VAR += -e HUGGINGFACE_HUB_TOKEN=$(HUGGINGFACE_HUB_TOKEN)
+DOCKER_ENV_VAR += -e SYSTEM_NAME=ACC_AI_HNC
 
 # Handle different nvidia-docker version. Do not use nvidia-docker when running with CPUs
 ifneq ($(wildcard /usr/bin/nvidia-docker),)
