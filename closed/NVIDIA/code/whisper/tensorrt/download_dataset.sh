@@ -8,6 +8,8 @@ export DATA_DIR=/work/build/data/whisper-large-v3
 export LIBRISPEECH_DIR=${DATA_DIR}/LibriSpeech
 export UTILS_DIR=/work/code/whisper/tensorrt/utils
 export OUTPUT_DIR=/work/build/preprocessed_data/whisper-large-v3
+export SOURCE_UTILS_DIR=/work/build/inference/speech2text/utils
+cp ${SOURCE_UTILS_DIR}/inference_librispeech.csv ${UTILS_DIR}/inference_librispeech.csv
 mkdir -p ${LIBRISPEECH_DIR}
 
 cd ${WORKSPACE_DIR}
