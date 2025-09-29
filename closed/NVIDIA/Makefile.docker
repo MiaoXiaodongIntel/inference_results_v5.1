@@ -149,6 +149,8 @@ endif
 PREBUILD_ENV_VARS := \
     BASE_IMAGE=$(CONTAINER_REGISTRY):$(BASE_IMAGE_NAME) \
     ENV=$(ENV) \
+    HTTP_PROXY=http://proxy-dmz.intel.com:911 \
+    HTTPS_PROXY=http://proxy-dmz.intel.com:912 \
     BUILD_CONTEXT=$(BUILD_CONTEXT) \
     CUDA_VER=$(CUDA_VER) \
     TRT_VER=$(TRT_VER) \
@@ -157,6 +159,8 @@ PREBUILD_ENV_VARS := \
     INSTALL_RGAT_DEPS=$(INSTALL_RGAT_DEPS)
 ifeq ($(ENV), release)
     PREBUILD_ENV_VARS += \
+        HTTP_PROXY=http://proxy-dmz.intel.com:911 \
+        HTTPS_PROXY=http://proxy-dmz.intel.com:912 \
         LOADGEN_HASH=$(LOADGEN_HASH) \
         INFERENCE_URL=$(INFERENCE_URL) \
         TRTLLM_HASH=$(TRTLLM_HASH) \
