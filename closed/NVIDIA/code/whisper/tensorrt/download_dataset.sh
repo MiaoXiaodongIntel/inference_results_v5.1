@@ -18,7 +18,7 @@ cd ${WORKSPACE_DIR}
 python ${UTILS_DIR}/download_librispeech.py \
     ${UTILS_DIR}/inference_librispeech.csv \
     ${LIBRISPEECH_DIR} \
-    -e ${DATA_DIR}
+    -e ${DATA_DIR} || exit $?
 
 # Consolidates all Librispeech paritions into common dir
 mkdir -p ${LIBRISPEECH_DIR}/dev-all

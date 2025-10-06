@@ -31,7 +31,11 @@ def preprocess_whisper(data_dir, preprocessed_data_dir):
     custom_env["DATA_DIR"] = data_dir
     custom_env["OUTPUT_DIR"] = preprocessed_data_dir
 
-    subprocess.run(["bash", "code/whisper/tensorrt/download_dataset.sh"], env=custom_env)
+    try:
+        subprocess.run(["bash", "code/whisper/tensorrt/download_dataset.sh"], env=custom_env, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while downloading dataset: {e}")
+        exit(1)
 
 
 def main():
