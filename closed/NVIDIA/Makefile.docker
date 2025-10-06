@@ -221,7 +221,7 @@ endif
 ifeq ($(NO_DOCKER_PULL), 0)
 	docker pull $(CONTAINER_REGISTRY):$(BASE_IMAGE_NAME)
 endif
-	$(SSH_AGENT_CMD) docker buildx build --target $(ENV) -t mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest $(DOCKER_BUILD_ARGS) \
+	$(SSH_AGENT_CMD) docker buildx build --target $(ENV) -t mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest-5.1 $(DOCKER_BUILD_ARGS) \
 		--network host --build-context common=docker/common \
 		-f $(DOCKER_FILENAME) docker
 
@@ -230,8 +230,8 @@ endif
 .PHONY: docker_add_user
 docker_add_user:
 	@echo "Adding user account into image"
-	DOCKER_BUILDKIT=$(DOCKER_BUILDKIT) docker build -t mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest --network host \
-		--build-arg BASE_IMAGE=mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest \
+	DOCKER_BUILDKIT=$(DOCKER_BUILDKIT) docker build -t mlperf-inference:$(DOCKER_TAG)-$(ENV)-5.1 --network host \
+		--build-arg BASE_IMAGE=mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest-5.1 \
 		--build-arg GID=$(GROUPID) --build-arg UID=$(UID) --build-arg GROUP=$(GROUPNAME) --build-arg USER=$(UNAME) \
 		- < docker/Dockerfile.user
 
@@ -260,6 +260,6 @@ launch_docker:
 		$(DOCKER_MOUNTS) $(DOCKER_ARGS) \
 		$(DOCKER_ENV_VAR) \
 		$(shell if [ -n "$$MIG_CONF" ] && [ "$$MIG_CONF" = "ALL" ]; then echo "--gpus all -e NVIDIA_MIG_CONFIG_DEVICES=all"; elif [ -n "$$MIG_CONF" ] && [ "$$MIG_CONF" != "OFF" ]; then echo "--gpus '\"device=`bash scripts/mig_get_uuid.sh`\"'"; fi) \
-		mlperf-inference:$(DOCKER_TAG)-$(ENV)-latest $(DOCKER_COMMAND)
+		mlperf-inference:$(DOCKER_TAG)-$(ENV)-5.1 $(DOCKER_COMMAND)
 
 endif # ifndef MAKEFILE_DOCKER_INCLUDED
