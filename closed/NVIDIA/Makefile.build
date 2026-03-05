@@ -303,7 +303,7 @@ build_trt_llm:
 	/work/.llm_$(ARCH)/bin/pip install $(TRTLLM_BUILD_DIR)/tensorrt*.whl
 	/work/.llm_$(ARCH)/bin/pip install -r docker/common/requirements/requirements.llm.txt
 # Mainly to add the huggingface token required by /work/build/TRTLLM/docs/source/quick-start-guide.md
-	@pip install huggingface_hub && huggingface-cli login --token $(HUGGINGFACE_HUB_TOKEN)
+	@pip install huggingface_hub && hf auth login --token $(HUGGINGFACE_HUB_TOKEN)
 
 # Build TensorRT plugins.
 .PHONY: build_plugins
