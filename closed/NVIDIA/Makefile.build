@@ -299,9 +299,8 @@ build_trt_llm:
 	fi
 	python -m venv .llm_$(ARCH) --system-site-packages
 	@echo "Building TRT-LLM..."
-	@apt-get update
-	@apt-get install -y gcc-12 g++-12
-	cd $(TRTLLM_DIR) && CCACHE_NODISABLE=true CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12 /work/.llm_$(ARCH)/bin/python scripts/build_wheel.py --use_ccache --benchmarks -a="$(TRTLLM_BUILD_ARCH)" --no-venv --clean
+	cd $(TRTLLM_DIR) && CCACHE_NODISABLE=true /work/.llm_$(ARCH)/bin/python scripts/build_wheel.py --use_ccache --benchmarks -a="$(TRTLLM_BUILD_ARCH)" --no-venv --clean
+	/work/.llm_$(ARCH)/bin/pip install $(TRTLLM_BUILD_DIR)/tensorrt*.whl
 	/work/.llm_$(ARCH)/bin/pip install -r docker/common/requirements/requirements.llm.txt
 # Mainly to add the huggingface token required by /work/build/TRTLLM/docs/source/quick-start-guide.md
 	@pip install huggingface_hub && hf auth login --token $(HUGGINGFACE_HUB_TOKEN)
